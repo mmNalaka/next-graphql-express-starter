@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           Int          @id @default(autoincrement())
+  email        String       @unique
+  firstName    String
+  lastName     String
+  picture      String?
+  role         String       @default("GUEST")
+  createdAt    DateTime     @default(now())
+  lastLoggedIn DateTime
+  permissions  Permission[]
+}
+
+model Permission {
+  id        Int      @id @default(autoincrement())
+  code      String   @unique
+  label     String   @unique
+  createdAt DateTime @default(now())
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
+}
+
+model Redirection {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  from        String
+  to          String
+  isRegex     Boolean  @default(false)
+  type        String   @default("Temporary")
+  description String?
+  createdBy   String?
+  updatedBy   String?
+}
