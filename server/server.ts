@@ -4,7 +4,6 @@ dotenv.config()
 import next from 'next'
 import express from 'express'
 import session from 'express-session'
-import bodyParser from 'body-parser'
 import { ApolloServer } from 'apollo-server-express'
 import { applyMiddleware } from 'graphql-middleware'
 
@@ -30,7 +29,6 @@ server.prepare().then(() => {
     context: createContent,
   })
 
-  app.use(bodyParser.json())
   app.use(session(config.sessionConfig))
   app.use(passport.initialize())
   app.use(passport.session())
@@ -43,7 +41,6 @@ server.prepare().then(() => {
 
   // Pass the rest to the NextJs server
   app.all('*', passportUtils.isAuthenticated, (req, res) => {
-    console.log(req.session)
     return handle(req, res)
   })
 

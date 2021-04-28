@@ -277,11 +277,11 @@ type User {
 
 input UserCreateNestedOneWithoutPermissionsInput {
   connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutpermissionsInput
+  connectOrCreate: UserCreateOrConnectWithoutPermissionsInput
   create: UserCreateWithoutPermissionsInput
 }
 
-input UserCreateOrConnectWithoutpermissionsInput {
+input UserCreateOrConnectWithoutPermissionsInput {
   create: UserCreateWithoutPermissionsInput!
   where: UserWhereUniqueInput!
 }
@@ -309,7 +309,7 @@ input UserUpdateInput {
 
 input UserUpdateOneWithoutPermissionsInput {
   connect: UserWhereUniqueInput
-  connectOrCreate: UserCreateOrConnectWithoutpermissionsInput
+  connectOrCreate: UserCreateOrConnectWithoutPermissionsInput
   create: UserCreateWithoutPermissionsInput
   delete: Boolean
   disconnect: Boolean
