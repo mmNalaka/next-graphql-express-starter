@@ -40,8 +40,8 @@ server.prepare().then(() => {
   graphqlServer.applyMiddleware({ app, path: '/api/graphql' })
 
   // Pass the rest to the NextJs server
-  app.all('*', passportUtils.isAuthenticated, (req, res) => {
-    return handle(req, res)
+  app.all('*', (req, res) => {
+    return handle(req, res as any)
   })
 
   app.listen(PORT, () => {
